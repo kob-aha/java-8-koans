@@ -1,4 +1,4 @@
-package org.java8koans.koan1;
+package org.java8koans.koan01;
 
 public class HelloAndGoodByeImpl implements GoodbyeService, HelloService {
 

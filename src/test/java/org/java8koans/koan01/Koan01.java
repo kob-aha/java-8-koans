@@ -1,4 +1,4 @@
-package org.java8koans.koan1;
+package org.java8koans.koan01;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
  *   https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html
  *   http://www.javacodegeeks.com/2014/05/java-8-features-tutorial.html#Interface_Default
  */
-public class Koan1 {
+public class Koan01 {
 
     public static final String SPEAK_METHOD_NAME = "speak";
 

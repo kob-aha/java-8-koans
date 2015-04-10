@@ -1,4 +1,4 @@
-package org.java8koans.koan1;
+package org.java8koans.koan01;
 
 public interface SpeakService {
     public final String DEFAULT_SPEAK_SENTENCE = "Speaking from " + SpeakService.class.getSimpleName();
