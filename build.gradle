@@ -73,18 +73,32 @@ task sayHello << {
 // TODO Update quotes file
 //test.dependsOn sayHello
 
-// launch browser if test failed. otherwise show that koan is complete
-gradle.taskGraph.afterTask { task, taskState ->
-    if (task.name != 'test')
-        return
+task testTaskFinalizer(description: 'Finalizer task for the test task')
 
-    if (taskState.failure) {
-        def reportFile = task.reports.html.entryPoint
-        Desktop.desktop.browse(reportFile.toURI())
-    } else {
+task testSuccessFinalizer(description: 'Outputs a success message in case all tests pass') {
+    doFirst {
         println "Koan is complete. Well done!"
     }
+
+    onlyIf {
+        !tasks.test.state.failure
+    }
 }
+
+task testFailureFinalizer(description: 'Opens the generated HTML test report in case of a test failure') {
+    doFirst {
+        def reportFile = tasks.test.reports.html.entryPoint
+        Desktop.desktop.browse(reportFile.toURI())
+    }
+
+    onlyIf {
+        tasks.test.state.failure
+    }
+}
+
+testTaskFinalizer.dependsOn testSuccessFinalizer, testFailureFinalizer
+
+test.finalizedBy testTaskFinalizer
 
 // since we're running in quiet logging, show the user what tests are running
 tasks.withType(Test) { testTask ->
