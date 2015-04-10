@@ -34,7 +34,8 @@ dependencies {
 task removeSolutions << {
     def solutionsRemoved = 0
     def solutionRegex = $/(?sm)(// -{12} START EDITING HERE -{22})(.*?)(\s+// -{12} STOP EDITING HERE  -{22})/$
-    sourceSets.test.allSource.files.each { File sourceFile ->
+    def sourceFiles = (sourceSets.test.allSource.files + sourceSets.main.allSource.files)
+    sourceFiles.each { File sourceFile ->
         solutionsRemoved += (sourceFile.text =~ solutionRegex).count
         sourceFile.text = sourceFile.text.replaceAll(solutionRegex, '$1\n\n$3')
     }
@@ -47,8 +48,6 @@ tasks.addRule('Pattern: koan<Number>: Runs a single Koan') { String taskName ->
         // create a dummy task for the task name specified on the command line
         def dummyTask = task(taskName)
         def koanName = taskName[0].toUpperCase() + taskName[1..-1]
-
-        println(tasks.withType(Test))
 
         // make all Test tasks a dependency of the dummy task and make sure only the koan test is executed
         tasks.withType(Test) { testTask ->
