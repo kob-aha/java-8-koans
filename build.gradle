@@ -52,7 +52,7 @@ tasks.addRule('Pattern: koan<Number>: Runs a single Koan') { String taskName ->
         // make all Test tasks a dependency of the dummy task and make sure only the koan test is executed
         tasks.withType(Test) { testTask ->
             logger.info("Single Koan Execution: apply include pattern to Test task <$testTask.name>")
-            testTask.properties['test.single'] = koanName
+            testTask.include "**/${koanName}.class"
             dummyTask.dependsOn testTask
         }
     }
