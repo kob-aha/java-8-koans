@@ -28,8 +28,7 @@ public class Koan02 {
         // For more info see "Method and Constructor References" section in http://winterbe.com/posts/2014/03/16/java-8-tutorial/
 
         // ------------ START EDITING HERE ----------------------
-
-
+        factory = MiniCar::new;
         // ------------ STOP EDITING HERE  ----------------------
 
         assertNotNull("Factory should not be null", factory);
@@ -43,8 +42,7 @@ public class Koan02 {
         // Now set factory so it will be able to create a LuxuryCar instance.
 
         // ------------ START EDITING HERE ----------------------
-
-
+        factory = LuxuryCar::new;
         // ------------ STOP EDITING HERE  ----------------------
 
         Car luxuryCar = factory.create(JAGUAR_MANUFACTURER);
@@ -65,8 +63,7 @@ public class Koan02 {
         // Init compareByType with a static method reference taken from CarComparators to compare cars by car type.
 
         // ------------ START EDITING HERE ----------------------
-
-
+        compareByType = CarComparators::compareByType;
         // ------------ STOP EDITING HERE  ----------------------
 
         Arrays.sort(carsArr, compareByType);
@@ -81,8 +78,7 @@ public class Koan02 {
         // Init compareByManufacturer with a static method reference taken from CarComparators to compare cars by manufacturer.
 
         // ------------ START EDITING HERE ----------------------
-
-
+        compareByManufacturer = CarComparators::compareByManufacturer;
         // ------------ STOP EDITING HERE  ----------------------
 
         Arrays.sort(carsArr, compareByManufacturer);
@@ -106,8 +102,7 @@ public class Koan02 {
         //      https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html#nullsFirst-java.util.Comparator-
 
         // ------------ START EDITING HERE ----------------------
-
-
+        compareChain = Comparator.nullsFirst(compareByType).thenComparing(compareByManufacturer);
         // ------------ STOP EDITING HERE  ----------------------
 
         Arrays.sort(carsArr, compareChain);
@@ -131,8 +126,7 @@ public class Koan02 {
         // Init carManufacturerExtractor with a method reference to get a car manufacturer
 
         // ------------ START EDITING HERE ----------------------
-
-
+        carManufacturerExtractor = c::getManufacturer;
         // ------------ STOP EDITING HERE  ----------------------
 
         assertEquals("Manufacturer is different than expected",
@@ -151,8 +145,7 @@ public class Koan02 {
         // Sort the manufacturers array using String method reference. null values should be placed last.
 
         // ------------ START EDITING HERE ----------------------
-
-
+        manufactureComparator = Comparator.nullsLast(String::compareTo);
         // ------------ STOP EDITING HERE  ----------------------
 
         Arrays.sort(manufacturers, manufactureComparator);
