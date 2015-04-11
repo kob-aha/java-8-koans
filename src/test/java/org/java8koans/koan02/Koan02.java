@@ -1,5 +1,6 @@
 package org.java8koans.koan02;
 
+import org.java8koans.entities.CarManufacturers;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -17,9 +18,6 @@ import static org.junit.Assert.*;
  */
 public class Koan02 {
 
-    public static final String TOYOTA_MANUFACTURER = "Toyota";
-    public static final String JAGUAR_MANUFACTURER = "Jaguar";
-
     @Test
     public void testConstructorReference() {
         CarFactory<Car> factory = null;
@@ -33,7 +31,7 @@ public class Koan02 {
 
         assertNotNull("Factory should not be null", factory);
 
-        Car miniCar = factory.create(TOYOTA_MANUFACTURER);
+        Car miniCar = factory.create(CarManufacturers.TOYOTA.name());
 
         assertEquals("Car type is different than expected",
                 CarType.MINI,
@@ -45,7 +43,7 @@ public class Koan02 {
         factory = LuxuryCar::new;
         // ------------ STOP EDITING HERE  ----------------------
 
-        Car luxuryCar = factory.create(JAGUAR_MANUFACTURER);
+        Car luxuryCar = factory.create(CarManufacturers.JAGUAR.name());
 
         assertEquals("Car type is different than expected",
                 CarType.LUXURY,
@@ -54,8 +52,8 @@ public class Koan02 {
 
     @Test
     public void testStaticReference() {
-        Car carA = new MiniCar(TOYOTA_MANUFACTURER);
-        Car carB = new LuxuryCar(JAGUAR_MANUFACTURER);
+        Car carA = new MiniCar(CarManufacturers.TOYOTA.name());
+        Car carB = new LuxuryCar(CarManufacturers.JAGUAR.name());
 
         Car[] carsArr = new Car[] {carB, carA};
         Comparator<Car> compareByType = null;
@@ -119,7 +117,7 @@ public class Koan02 {
         //      http://www.javacodegeeks.com/2013/03/introduction-to-functional-interfaces-a-concept-recreated-in-java-8.html
         //      https://docs.oracle.com/javase/8/docs/api/java/util/function/Supplier.html
 
-        Car c = new MiniCar(TOYOTA_MANUFACTURER);
+        Car c = new MiniCar(CarManufacturers.TOYOTA.name());
         Supplier<String> carManufacturerExtractor = null;
 
         // Init carManufacturerExtractor with a method reference to get a car manufacturer
@@ -129,14 +127,14 @@ public class Koan02 {
         // ------------ STOP EDITING HERE  ----------------------
 
         assertEquals("Manufacturer is different than expected",
-                TOYOTA_MANUFACTURER,
+                CarManufacturers.TOYOTA.name(),
                 carManufacturerExtractor.get());
     }
 
     @Test
     public void testMethodTypeReference() {
-        Car carA = new LuxuryCar(JAGUAR_MANUFACTURER);
-        Car carB = new MiniCar(TOYOTA_MANUFACTURER);
+        Car carA = new LuxuryCar(CarManufacturers.JAGUAR.name());
+        Car carB = new MiniCar(CarManufacturers.TOYOTA.name());
 
         String[] manufacturers = new String[] {carB.getManufacturer(), null, carA.getManufacturer()};
         Comparator<String> manufactureComparator = null;
