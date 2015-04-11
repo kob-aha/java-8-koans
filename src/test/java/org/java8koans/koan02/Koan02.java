@@ -24,7 +24,7 @@ public class Koan02 {
     public void testConstructorReference() {
         CarFactory<Car> factory = null;
 
-        // Set factory so it will be able to create a MiniCar instance. Use constructor reference.
+        // Assign factory a value so it will be able to create a MiniCar instance. Use constructor reference.
         // For more info see "Method and Constructor References" section in http://winterbe.com/posts/2014/03/16/java-8-tutorial/
 
         // ------------ START EDITING HERE ----------------------
@@ -39,7 +39,7 @@ public class Koan02 {
                 CarType.MINI,
                 miniCar.getCarType());
 
-        // Now set factory so it will be able to create a LuxuryCar instance.
+        // Now Assign factory a value so it will be able to create a LuxuryCar instance.
 
         // ------------ START EDITING HERE ----------------------
         factory = LuxuryCar::new;
@@ -60,7 +60,7 @@ public class Koan02 {
         Car[] carsArr = new Car[] {carB, carA};
         Comparator<Car> compareByType = null;
 
-        // Init compareByType with a static method reference taken from CarComparators to compare cars by car type.
+        // Assign compareByType a static method reference taken from CarComparators to compare cars by car type.
 
         // ------------ START EDITING HERE ----------------------
         compareByType = CarComparators::compareByType;
@@ -75,7 +75,7 @@ public class Koan02 {
         Comparator<Car> compareByManufacturer = null;
         carsArr = new Car[] {carA, carB};
 
-        // Init compareByManufacturer with a static method reference taken from CarComparators to compare cars by manufacturer.
+        // Assign compareByManufacturer a static method reference taken from CarComparators to compare cars by manufacturer.
 
         // ------------ START EDITING HERE ----------------------
         compareByManufacturer = CarComparators::compareByManufacturer;
@@ -94,8 +94,8 @@ public class Koan02 {
 
         carsArr = new Car[] {carC, carB, carA, null};
 
-        // Init compareChain with previous comparator instance so that the array will be sorted by type followed by manufacturer.
-        // In addition, null values should be placed first.
+        // Assign compareChain a value so that the array will be sorted by type followed by manufacturer.
+        // Use the previous method reference and also make sure null values will be placed first (without adding null validations).
         //
         // For more info see:
         //      https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html
@@ -110,7 +110,6 @@ public class Koan02 {
         assertArrayEquals("Array is not sorted as expected",
                 new Car[] {null, carA, carB, carC},
                 carsArr);
-
     }
 
     @Test
@@ -153,6 +152,5 @@ public class Koan02 {
         assertArrayEquals("Array is not sorted as expected",
                 new String[] {carA.getManufacturer(), carB.getManufacturer(), null},
                 manufacturers);
-
     }
 }
