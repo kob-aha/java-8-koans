@@ -26,10 +26,14 @@ To allow gradlew to work through your proxy, simply add the proxy parameters to 
 The file should look as follows:
 
     ...
-    systemProp.http.proxyHost=[proxy host]
-    systemProp.http.proxyPort=[proxy port]
-    systemProp.http.proxyUser=[proxy user (leave empty if not necessary)]
-    systemProp.http.proxyPassword=[proxy user password (leave empty if not necessary)]
+	systemProp.https.proxyHost=[https proxy host]
+    systemProp.https.proxyPort=[https proxy port]
+    systemProp.https.proxyUser=[https proxy user (leave empty if not necessary)]
+    systemProp.https.proxyPassword=[https proxy user password (leave empty if not necessary)]
+    systemProp.http.proxyHost=[http proxy host]
+    systemProp.http.proxyPort=[http proxy port]
+    systemProp.http.proxyUser=[http proxy user (leave empty if not necessary)]
+    systemProp.http.proxyPassword=[http proxy user password (leave empty if not necessary)]
     ...
 
 For more information see "Accessing the web via a proxy" [here][proxy].
