@@ -22,7 +22,7 @@ This is why it is important to run step 3 above before trying to solve the faili
 #### How to work behind a proxy? ####
 
 The `gradlew` script downloads Gradle for you, so you don't have to set up anything by yourself.
-To allow gradlew to work through your proxy, simply add the proxy parameters to gradle.properties file located in the project's root.
+To allow gradlew to work through your proxy, simply edit the proxy parameters in gradle.properties file located in the project's root (make sure to configure both http and https parameters).
 The file should look as follows:
 
     ...
