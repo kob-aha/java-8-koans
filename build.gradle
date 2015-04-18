@@ -30,6 +30,7 @@ repositories {
 dependencies {
     testCompile 'junit:junit:4.11'
     testCompile 'org.mockito:mockito-all:1.10.19'
+    compile 'com.google.guava:guava:18.0'
 }
 
 task removeSolutions << {
@@ -67,7 +68,7 @@ task wrapper(type: Wrapper) {
 task sayHello << {
     List<String> lines = file('gradle/one-liners.txt').readLines()
     def quote = lines.get(new Random().nextInt(lines.size() - 1))
-    println "Groovy Koans ${version}:\n${quote}"
+    println "Java 8 Koans ${version}:\n${quote}"
     println "${'-' * quote.size()}\n"
 }
 

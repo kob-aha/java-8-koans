@@ -16,4 +16,16 @@ public abstract class Car {
     public String getManufacturer() {
         return manufacturer;
     }
+
+    public String getCsvString() {
+        return getCarType() + ", " + getManufacturer();
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "carType=" + carType +
+                ", manufacturer='" + manufacturer + '\'' +
+                '}';
+    }
 }
