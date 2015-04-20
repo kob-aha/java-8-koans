@@ -192,4 +192,6 @@ public class Koan04 {
         Assert.assertEquals("Sum does not match expected", 500500, sumTo1000);
     }
 
+
+    // TODO Add String join koan as described in http://technologyconversations.com/2014/11/04/java-8-streams-micro-katas/ (last example)
 }
