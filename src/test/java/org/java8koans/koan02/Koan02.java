@@ -31,7 +31,7 @@ public class Koan02 {
 
         assertNotNull("Factory should not be null", factory);
 
-        Car miniCar = factory.create(CarManufacturers.TOYOTA.name());
+        Car miniCar = factory.create(CarManufacturers.TOYOTA.name(), 0);
 
         assertEquals("Car type is different than expected",
                 CarType.MINI,
@@ -43,7 +43,7 @@ public class Koan02 {
         factory = LuxuryCar::new;
         // ------------ STOP EDITING HERE  ----------------------
 
-        Car luxuryCar = factory.create(CarManufacturers.JAGUAR.name());
+        Car luxuryCar = factory.create(CarManufacturers.JAGUAR.name(), 0);
 
         assertEquals("Car type is different than expected",
                 CarType.LUXURY,

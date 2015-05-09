@@ -29,8 +29,12 @@ public final class Cars {
         String[] csvData = line.split(CSV_SEPARATOR);
 
         if (csvData != null && csvData.length > 1) {
-            CarFactory<? extends Car> carFactory = carFactories.get(CarType.valueOf(csvData[0].trim()));
-            retVal = Optional.of(carFactory.create(csvData[1].trim()));
+            String carType = csvData[0].trim();
+            String carManufacturer = csvData[1].trim();
+            int carPrice = Integer.parseInt(csvData[2].trim());
+
+            CarFactory<? extends Car> carFactory = carFactories.get(CarType.valueOf(carType));
+            retVal = Optional.of(carFactory.create(carManufacturer, carPrice));
         }
 
         return retVal;

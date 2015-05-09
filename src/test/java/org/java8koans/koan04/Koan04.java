@@ -35,7 +35,7 @@ public class Koan04 {
     private static List<Car> carList = null;
 
     /**
-     * This method loads all the car used in this test class from a CSV file.
+     * This method loads all the cars used in this test class from a CSV file.
      * The method is an example of how to use Streams for loading data from files and not just for collections.
      *
      * @throws Exception in case the was any exception loading the cars CSV file.
@@ -75,7 +75,7 @@ public class Koan04 {
         Stream<String> carManufacturersStream = null;
 
         // Initialize carManufacturersStream so that it will return distinct car manufacturer names.
-        // Hint: you should start with "carList.stream()" and than use Stream's map and distinct methods.
+        // Hint: you should start with "carList.stream()" and then use Stream's map and distinct methods.
         // More info here:
         //      https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html#map-java.util.function.Function-
         //      https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html#distinct--
@@ -156,9 +156,87 @@ public class Koan04 {
 
     }
 
+    // In the following test methods we will explore various ways to calculate the sum of all the cars' prices.
+
+    @Test
+    public void sumPriceUsingCollect() {
+
+        // In this method we will calculate the sum using the "collect" method.
+
+        int priceSum = 0;
+
+        // Initialize priceSum by calculating the sum using collect method
+        // (https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html#collect-java.util.stream.Collector-).
+        // Hint: Find the matching reduction collector by using Collectors class.
+
+        // ------------ START EDITING HERE ----------------------
+        priceSum = carList.stream().collect(Collectors.reducing(0, Car::getPrice, Integer::sum));
+        // ------------ STOP EDITING HERE  ----------------------
+
+        Assert.assertEquals("Price sum does not match expected", 3495000, priceSum);
+    }
+
+    @Test
+    public void sumPriceUsingReduce() {
+
+        // In this method we will calculate the sum using the "reduce" method.
+        // For more info see: https://docs.oracle.com/javase/tutorial/collections/streams/reduction.html
+
+        Stream<Integer> carPriceStream = null;
+        int priceSum = 0;
+
+        // First of initialize carPriceStream with a stream of car prices
+
+        // ------------ START EDITING HERE ----------------------
+        carPriceStream = carList.stream().map(Car::getPrice);
+        // ------------ STOP EDITING HERE  ----------------------
+
+        Assert.assertNotNull("carPriceStream is null", carPriceStream);
+
+        // Now initialize priceSum with the sum value using the reduce method.
+        //
+        // Hint: instead of implementing an accumulator method yourself (using a lambda expression), you can use a
+        //  method reference from Integer class
+
+        // ------------ START EDITING HERE ----------------------
+        priceSum = carPriceStream.reduce(0, Integer::sum);
+        // ------------ STOP EDITING HERE  ----------------------
+
+        Assert.assertEquals("Price sum does not match expected", 3495000, priceSum);
+    }
+
+    @Test
+    public void sumPriceUsingIntStream() {
+
+        // In this method we will calculate the sum using IntStream's sum method.
+        // For more info see: https://docs.oracle.com/javase/8/docs/api/java/util/stream/IntStream.html
+
+        IntStream carPriceStream = null;
+        int priceSum = 0;
+
+        // First of initialize carPriceStream with an IntStream containing the car prices
+
+        // ------------ START EDITING HERE ----------------------
+        carPriceStream = carList.stream().mapToInt(Car::getPrice);
+        // ------------ STOP EDITING HERE  ----------------------
+
+        Assert.assertNotNull("carPriceStream is null", carPriceStream);
+
+        // Now initialize priceSum with the sum value using the relevant IntStream method.
+
+        // ------------ START EDITING HERE ----------------------
+        priceSum = carPriceStream.sum();
+        // ------------ STOP EDITING HERE  ----------------------
+
+        Assert.assertEquals("Price sum does not match expected", 3495000, priceSum);
+    }
+
+    // Not just collections can be used as streams. In the following test methods we'll see other types of
+    // streams we can use.
+
     @Test
     public void intStreamIntro() {
-        // In this test method we will use IntStream practice some of the Stream operations.
+        // In this test method we will use IntStream to practice some of Stream's operations.
         // For more info see https://docs.oracle.com/javase/8/docs/api/java/util/stream/IntStream.html
 
         IntStream range = null;
@@ -182,7 +260,6 @@ public class Koan04 {
 
         // Calculate the sum of numbers from 1 to 1000 and initialize sumTo1000 with the result.
         // Make sure to reinitialize range as it is already been used.
-        // Hint: use IntStream.range
 
         // ------------ START EDITING HERE ----------------------
         range = IntStream.range(1, 1001);
@@ -191,6 +268,17 @@ public class Koan04 {
 
         Assert.assertEquals("Sum does not match expected", 500500, sumTo1000);
     }
+
+//    @Test
+//    public void intStreamFun() {
+//
+//        int maxNumber = 1000;
+//        IntStream range = IntStream.range(0, maxNumber);
+//
+//        IntStream evenNumbers = range.filter(v -> v % 2 == 0);
+//
+//
+//    }
 
 
     // TODO Add String join koan as described in http://technologyconversations.com/2014/11/04/java-8-streams-micro-katas/ (last example)

@@ -22,13 +22,13 @@ public class GenerateDataFile {
 
     public static void main(String[] args) throws IOException {
 
-        List<Car> cars = Arrays.asList(new MiniCar(CarManufacturers.TOYOTA.name()),
-                new LuxuryCar(CarManufacturers.TOYOTA.name()),
-                new MiniCar(CarManufacturers.SUZUKI.name()),
-                new LuxuryCar(CarManufacturers.JAGUAR.name()),
-                new MiniCar(CarManufacturers.KIA.name()),
-                new RaceCar(CarManufacturers.JAGUAR.name()),
-                new RaceCar(CarManufacturers.FERRARI.name()));
+        List<Car> cars = Arrays.asList(new MiniCar(CarManufacturers.TOYOTA.name(), 85000),
+                new LuxuryCar(CarManufacturers.TOYOTA.name(), 250000),
+                new MiniCar(CarManufacturers.SUZUKI.name(), 90000),
+                new LuxuryCar(CarManufacturers.JAGUAR.name(), 500000),
+                new MiniCar(CarManufacturers.KIA.name(), 70000),
+                new RaceCar(CarManufacturers.JAGUAR.name(), 1000000),
+                new RaceCar(CarManufacturers.FERRARI.name(), 1500000));
 
         Path dataFile = FileSystems.getDefault().getPath("src" + File.separator + "test" + File.separator + "resources" +
             File.separator + "cars-data.csv");
